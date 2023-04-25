@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
     
@@ -51,7 +51,7 @@ jobs:
         cp -i network/delta.lst bugfixedhl-linux
         cp -i Readme.txt bugfixedhl-linux
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: bugfixedhl-linux
         path: bugfixedhl-linux/
