@@ -61,7 +61,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: hl-windows-client-release
+        name: hl-windows-client-debug
         path: hl-windows-client
  
   build-windows-server-release:
