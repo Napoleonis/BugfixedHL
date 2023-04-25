@@ -1,4 +1,4 @@
-name: C/C++ CI Client
+name: C/C++ Win Client
 
 on:
   workflow_dispatch:
