@@ -22,7 +22,7 @@ jobs:
         
     - name: Build release
       run: |
-        msbuild multiplayer.sln -target:client -configuration:Release
+        msbuild multiplayer.sln -target:client -p:Flavor=Release
         mkdir bugfixedhl-windows
         mkdir bugfixedhl-windows\client
         copy cl_dll\msvc\Release\client.dll bugfixedhl-windows\client\
@@ -50,7 +50,7 @@ jobs:
         
     - name: Build release
       run: |
-        msbuild multiplayer.sln -target:client -configuration:Release
+        msbuild multiplayer.sln -target:client -p:Flavor=Release
         mkdir bugfixedhl-windows
         mkdir bugfixedhl-windows\dlls
         mkdir bugfixedhl-windows\dlls-debug
