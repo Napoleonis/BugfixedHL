@@ -37,7 +37,7 @@ jobs:
         name: hl-windows-client-release
         path: hl-windows-client
  
-   build-windows-server-release:
+  build-windows-server-release:
     runs-on: windows-2019
   
     steps: 
