@@ -72,7 +72,7 @@ jobs:
       run: |
         msbuild multiplayer.sln -target:client
         mkdir bugfixedhl-windows
-        mkdir bugfixedhl-windows\cl_dll
+        mkdir bugfixedhl-windows\client
         copy cl_dll\msvc\Debug\client.dll bugfixedhl-windows\client\
         copy network\delta.lst bugfixedhl-windows
         copy Readme.txt bugfixedhl-windows
