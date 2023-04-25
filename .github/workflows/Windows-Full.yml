@@ -1,4 +1,4 @@
-name: C/C++ Windows
+name: Windows Full Build
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
     #branches: [ master ]
 
 jobs:
-  build-windows-client:
+  build-windows-client-release:
     runs-on: windows-2019
   
     steps: 
@@ -23,20 +23,48 @@ jobs:
     - name: Build release
       run: |
         msbuild multiplayer.sln -target:client -p:Configuration=Release
-        mkdir bugfixedhl-windows
-        mkdir bugfixedhl-windows\client
-        copy cl_dll\msvc\Release\client.dll bugfixedhl-windows\client\
-        copy cl_dll\msvc\Release\client.pdb bugfixedhl-windows\client\
-        copy network\delta.lst bugfixedhl-windows
-        copy Readme.txt bugfixedhl-windows
+        mkdir hl-windows-client
+        mkdir hl-windows-client\client
+        copy cl_dll\msvc\Release\client.dll hl-windows-client\client\
+        copy cl_dll\msvc\Release\client.pdb hl-windows-client\client\
+        copy network\delta.lst hl-windows-client
+        copy Readme.txt hl-windows-client
       
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: bugfixedhl-windows
-        path: bugfixedhl-windows
+        name: hl-windows-client-release
+        path: hl-windows-client
+ 
+  build-windows-client-debug:
+    runs-on: windows-2019
+  
+    steps: 
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
         
-  build-windows-server:
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.1.3
+        
+    - name: Build debug
+      run: |
+        msbuild multiplayer.sln -target:client -p:Configuration=Debug
+        mkdir hl-windows-client
+        mkdir hl-windows-client\client
+        copy cl_dll\msvc\Debug\client.dll hl-windows-client\client\
+        copy cl_dll\msvc\Debug\client.pdb hl-windows-client\client\
+        copy network\delta.lst hl-windows-client
+        copy Readme.txt hl-windows-client
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: hl-windows-client-release
+        path: hl-windows-client
+ 
+  build-windows-server-release:
     runs-on: windows-2019
   
     steps: 
@@ -50,17 +78,44 @@ jobs:
         
     - name: Build release
       run: |
-        msbuild multiplayer.sln -target:client -p:Configuration=Release
-        mkdir bugfixedhl-windows
-        mkdir bugfixedhl-windows\dlls
-        mkdir bugfixedhl-windows\dlls-debug
-        copy dlls\msvc\Release\hl.dll bugfixedhl-windows\dlls\
-        copy dlls\msvc\Release\hl.pdb bugfixedhl-windows\dlls\
-        copy network\delta.lst bugfixedhl-windows
-        copy Readme.txt bugfixedhl-windows
+        msbuild multiplayer.sln -target:hl -p:Configuration=Release
+        mkdir hl-windows-server
+        mkdir hl-windows-server\dlls
+        copy dlls\msvc\Release\hl.dll hl-windows-server\dlls\
+        copy dlls\msvc\Release\hl.pdb hl-windows-server\dlls\
+        copy network\delta.lst hl-windows-server
+        copy Readme.txt hl-windows-server
       
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: bugfixedhl-windows
-        path: bugfixedhl-windows
+        name: hl-windows-server-release
+        path: hl-windows-server
+  
+  build-windows-server-debug:
+    runs-on: windows-2019
+  
+    steps: 
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
+        
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.1.3
+        
+    - name: Build debug
+      run: |
+        msbuild multiplayer.sln -target:hl -p:Configuration=Debug
+        mkdir hl-windows-server
+        mkdir hl-windows-server\dlls
+        copy dlls\msvc\Debug\hl.dll hl-windows-server\dlls\
+        copy dlls\msvc\Debug\hl.pdb hl-windows-server\dlls\
+        copy network\delta.lst hl-windows-server
+        copy Readme.txt hl-windows-server
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: hl-windows-server-debug
+        path: hl-windows-server
