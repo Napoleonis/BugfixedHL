@@ -22,14 +22,11 @@ jobs:
         
     - name: Build release
       run: |
-        msbuild multiplayer.sln -target:client
+        msbuild multiplayer.sln -target:client --configuration Release
         mkdir bugfixedhl-windows
         mkdir bugfixedhl-windows\client
-        mkdir bugfixedhl-windows\client-debug
         copy cl_dll\msvc\Release\client.dll bugfixedhl-windows\client\
         copy cl_dll\msvc\Release\client.pdb bugfixedhl-windows\client\
-        copy cl_dll\msvc\Debug\client.dll bugfixedhl-windows\client-debug\
-        copy cl_dll\msvc\Debug\client.pdb bugfixedhl-windows\client-debug\
         copy network\delta.lst bugfixedhl-windows
         copy Readme.txt bugfixedhl-windows
       
@@ -53,14 +50,12 @@ jobs:
         
     - name: Build release
       run: |
-        msbuild multiplayer.sln -target:hl
+        msbuild multiplayer.sln -target:hl --configuration Release
         mkdir bugfixedhl-windows
         mkdir bugfixedhl-windows\dlls
         mkdir bugfixedhl-windows\dlls-debug
         copy dlls\msvc\Release\hl.dll bugfixedhl-windows\dlls\
         copy dlls\msvc\Release\hl.pdb bugfixedhl-windows\dlls\
-        copy dlls\msvc\Debug\hl.dll bugfixedhl-windows\dlls-debug\
-        copy dlls\msvc\Debug\hl.pdb bugfixedhl-windows\dlls-debug\
         copy network\delta.lst bugfixedhl-windows
         copy Readme.txt bugfixedhl-windows
       
