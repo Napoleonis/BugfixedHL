@@ -18,6 +18,7 @@ jobs:
         fetch-depth: 0
         
     - name: Install dependencies
+      run: |
         sudo su -c "echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial main' >> /etc/apt/sources.list"
         sudo su -c "echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe' >> /etc/apt/sources.list"
         sudo apt update -y
