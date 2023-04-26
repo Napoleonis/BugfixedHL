@@ -1,4 +1,4 @@
-name: C/C++ Linux Client
+name: C/C++ Linux Client2
 
 on:
   workflow_dispatch:
