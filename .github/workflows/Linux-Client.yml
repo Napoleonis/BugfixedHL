@@ -16,30 +16,8 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    
-    - name: Download dependencies
-      run: |
-        mkdir gcc-3.4
-        cd gcc-3.4
-        wget http://old-releases.ubuntu.com/ubuntu/pool/universe/g/gcc-3.4/cpp-3.4_3.4.6-6ubuntu5_amd64.deb  
-        wget http://old-releases.ubuntu.com/ubuntu/pool/universe/g/gcc-3.4/gcc-3.4-base_3.4.6-6ubuntu5_amd64.deb
-        wget http://old-releases.ubuntu.com/ubuntu/pool/universe/g/gcc-3.4/g++-3.4_3.4.6-6ubuntu5_amd64.deb  
-        wget http://old-releases.ubuntu.com/ubuntu/pool/universe/g/gcc-3.4/libstdc++6-dev_3.4.6-6ubuntu5_amd64.deb
-        wget http://old-releases.ubuntu.com/ubuntu/pool/universe/g/gcc-3.4/gcc-3.4_3.4.6-6ubuntu5_amd64.deb
-        cd $GITHUB_WORKSPACE
-    #- name: Install dependencies
-      #run: |
-        # Install 32 bits libraries
-        #sudo apt-get install gcc-multilib g++-multilib
-        #cd gcc-3.4
-        # Note: I had to force the install of libstdc because g++ depends on it and vice versa
-        #sudo dpkg -i gcc-3.4-base_3.4.6-6ubuntu5_amd64.deb
-        #sudo dpkg -i cpp-3.4_3.4.6-6ubuntu5_amd64.deb
-        #sudo dpkg -i gcc-3.4_3.4.6-6ubuntu5_amd64.deb
-        #sudo dpkg --force-all -i libstdc++6-dev_3.4.6-6ubuntu5_amd64.deb
-        #sudo dpkg -i g++-3.4_3.4.6-6ubuntu5_amd64.deb
-        #cd $GITHUB_WORKSPACE
-    - name: Install additional dependancies
+        
+    - name: Install dependencies
         sudo su -c "echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial main' >> /etc/apt/sources.list"
         sudo su -c "echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe' >> /etc/apt/sources.list"
         sudo apt update -y
